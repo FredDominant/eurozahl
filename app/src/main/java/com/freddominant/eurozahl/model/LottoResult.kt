@@ -2,21 +2,21 @@ package com.freddominant.eurozahl.model
 
 import com.google.gson.annotations.SerializedName
 
-internal data class LottoResult(
+data class LottoResult(
     val lottery: String,
     val lastDraw: LastDraw,
     val nextDraw: NextDraw,
     val draws: Draw
 )
 
-internal abstract class Draw(
+abstract class Draw(
     open val drawIdentifier: String,
     open val lottery: String,
     open val drawDate: String,
     open val drawDateUTC: String,
 )
 
-internal data class Jackpot(
+data class Jackpot(
     val jackpotSupported: Boolean,
     val drawIdentifier: String,
     val lottery: String,
@@ -25,19 +25,19 @@ internal data class Jackpot(
     val jackpots: Jackpots
 )
 
-internal data class Jackpots(
+data class Jackpots(
     @SerializedName("WC_1")
     val wc_One: String,
     @SerializedName("WC_2")
     val wc_Two: String,
 )
 
-internal data class DrawResult(
+data class DrawResult(
     val superNumber: Int,
     val numbers: List<Int>
 )
 
-internal data class LastDraw(
+data class LastDraw(
     override val drawIdentifier: String,
     override val lottery: String,
     override val drawDate: String,
@@ -56,7 +56,7 @@ internal data class LastDraw(
     drawDateUTC = drawDateUTC,
 )
 
-internal data class NextDraw(
+data class NextDraw(
     override val drawIdentifier: String,
     override val lottery: String,
     override val drawDate: String,

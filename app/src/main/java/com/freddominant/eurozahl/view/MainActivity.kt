@@ -1,4 +1,4 @@
-package com.freddominant.eurozahl
+package com.freddominant.eurozahl.view
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
