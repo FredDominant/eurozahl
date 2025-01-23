@@ -1,11 +1,13 @@
-package com.freddominant.eurozahl.mapper
+package com.freddominant.eurozahl.data.mapper
 
-import com.freddominant.eurozahl.model.DrawResult
-import com.freddominant.eurozahl.model.LastDraw
-import com.freddominant.eurozahl.model.Lottery
-import com.freddominant.eurozahl.model.LottoResult
-import com.freddominant.eurozahl.model.LottoResultUI
+import com.freddominant.eurozahl.domain.model.DrawResult
+import com.freddominant.eurozahl.domain.model.LastDraw
+import com.freddominant.eurozahl.domain.model.Lottery
+import com.freddominant.eurozahl.domain.model.LottoResult
+import com.freddominant.eurozahl.domain.model.LottoResultUI
 import java.math.BigDecimal
+import java.text.SimpleDateFormat
+import java.util.Locale
 import javax.inject.Inject
 
 typealias lottoResult = List<LottoResult>
@@ -18,12 +20,12 @@ class MapperImpl @Inject constructor() : Mapper<lottoResult, lottoUIResult> {
             val lotteryType = Lottery.getLotteryFromName(lottery.lottery)
             LottoResultUI(
                 title = lotteryType,
-                date = lottery.lastDraw.drawDate,
-                nextDrawDate = lottery.nextDraw.drawDate,
+                date = parseDate(lottery.lastDraw.drawDate),
+                nextDrawDate = parseDate(lottery.nextDraw.drawDate),
                 winningNumbers = lottery.lastDraw.drawResult.mapWinningNumbers(lotteryType),
                 jackpotHeight = lottery.lastDraw.getJackpotHeight(),
-                spiel77 = extractSideLotteryDetail(Lottery.SUPER_6, sideLotteries),
-                super6 = extractSideLotteryDetail(Lottery.SPIEL_77, sideLotteries)
+                spiel77 = extractSideLotteryDetail(Lottery.SPIEL_77, sideLotteries),
+                super6 = extractSideLotteryDetail(Lottery.SUPER_6, sideLotteries)
             )
         }
     }
@@ -48,5 +50,18 @@ class MapperImpl @Inject constructor() : Mapper<lottoResult, lottoUIResult> {
             Lottery.EURO_JACKPOT -> Pair(numbers, requireNotNull(euroNumbers))
             Lottery.SUPER_6, Lottery.SPIEL_77 -> Pair(numbers, emptyList())
         }
+    }
+
+
+    private fun parseDate(date: String): String {
+        val inputFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        val outputFormat = SimpleDateFormat(SIMPLIFIED_FORMAT, Locale.getDefault())
+        val formattedDate = inputFormat.parse(date) ?: return ""
+        return outputFormat.format(formattedDate)
+    }
+
+    private companion object {
+        const val DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ssXXX"
+        const val SIMPLIFIED_FORMAT = "EE., dd.MM.yyyy"
     }
 }

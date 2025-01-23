@@ -1,4 +1,4 @@
-package com.freddominant.eurozahl.model
+package com.freddominant.eurozahl.domain.model
 
 
 sealed interface Result<out T> {

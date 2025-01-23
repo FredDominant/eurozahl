@@ -57,6 +57,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.retrofit)
     implementation(libs.retrofit.convertor.gson)
+    implementation(libs.logging.interceptor)
 
     kapt(libs.hilt.android.compiler)
     testImplementation(libs.junit)
