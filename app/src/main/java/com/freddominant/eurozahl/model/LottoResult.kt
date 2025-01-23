@@ -6,7 +6,7 @@ data class LottoResult(
     val lottery: String,
     val lastDraw: LastDraw,
     val nextDraw: NextDraw,
-    val draws: Draw
+    val draws: List<Any>
 )
 
 abstract class Draw(
@@ -17,24 +17,19 @@ abstract class Draw(
 )
 
 data class Jackpot(
-    val jackpotSupported: Boolean,
     val drawIdentifier: String,
     val lottery: String,
     val drawDate: String,
     val currency: String,
-    val jackpots: Jackpots
-)
-
-data class Jackpots(
-    @SerializedName("WC_1")
-    val wc_One: String,
-    @SerializedName("WC_2")
-    val wc_Two: String,
+    val jackpots: Map<String, String>,
+    val jackpotSupported: Boolean,
 )
 
 data class DrawResult(
-    val superNumber: Int,
-    val numbers: List<Int>
+    val superNumber: Int? = null,
+    val numbers: List<Int>,
+    val number: String?,
+    val euroNumbers: List<Int>? = null
 )
 
 data class LastDraw(
@@ -42,11 +37,10 @@ data class LastDraw(
     override val lottery: String,
     override val drawDate: String,
     override val drawDateUTC: String,
-    val timeZone: String,
-    @SerializedName("cutofftime")
-    val cutOffTime: String,
     val drawResult: DrawResult,
-    val jackpots: Jackpots,
+    val quotas: Map<String, String>,
+    val nonMonetaryQuotas: Map<Any, Any>?,
+    val winners: Map<String, Double>,
     val totalStake: String,
     val currency: String
 ): Draw(
@@ -61,9 +55,9 @@ data class NextDraw(
     override val lottery: String,
     override val drawDate: String,
     override val drawDateUTC: String,
+    @SerializedName("cutofftime")
     val cutOffTime: String,
     val timeZone: String,
-    val drawResult: DrawResult,
     val jackpot: Jackpot,
 ): Draw(
     drawIdentifier = drawIdentifier,

@@ -1,5 +1,7 @@
 package com.freddominant.eurozahl.di
 
+import com.freddominant.eurozahl.mapper.Mapper
+import com.freddominant.eurozahl.mapper.MapperImpl
 import com.freddominant.eurozahl.util.CoroutineDispatcherProvider
 import com.freddominant.eurozahl.util.DispatcherProvider
 import com.freddominant.eurozahl.repository.Repository
