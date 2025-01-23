@@ -8,6 +8,6 @@ internal interface EurozahlApi {
     suspend fun getResults(): List<LottoResult>
 
     private companion object {
-        const val GET_RESULTS_URL = "/drawinfo/aggregated/6aus49,eurojackpot"
+        const val GET_RESULTS_URL = "drawinfo/aggregated/6aus49,eurojackpot,super6,spiel77"
     }
 }
