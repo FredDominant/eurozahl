@@ -32,7 +32,7 @@ class MainActivity : ComponentActivity() {
             EurozahlTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     val state = viewModel.lotteryEvents.collectAsState(
-                        LotteryUiEvents.ShowProgress(showProgress = true)
+                        LotteryUiEvents.ShowProgress
                     )
                     LotteryResult(
                         modifier = Modifier.padding(innerPadding),

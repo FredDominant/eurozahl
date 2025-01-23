@@ -2,7 +2,6 @@ package com.freddominant.eurozahl.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.freddominant.eurozahl.core.di.EurozahlApi
 import com.freddominant.eurozahl.domain.model.LottoResultUI
 import com.freddominant.eurozahl.domain.model.Result
 import com.freddominant.eurozahl.domain.usecases.GetLottoResultUseCase
@@ -16,8 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class EurozahlViewModel @Inject constructor (
-    private val api: EurozahlApi,
-    private val useCase: GetLottoResultUseCase,
+    private val useCase: GetLottoResultUseCase
 ): ViewModel() {
 
     private val _lotteryEvents = MutableSharedFlow<LotteryUiEvents>()
@@ -25,6 +23,7 @@ class EurozahlViewModel @Inject constructor (
 
     fun getLotteryResult() {
         viewModelScope.launch {
+            updateState(LotteryUiEvents.ShowProgress)
             when(val result = useCase.invoke(Unit)) {
                 is Result.Success -> handleSuccess(result.data)
                 is Result.Error -> handleError(result.error)

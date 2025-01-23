@@ -1,5 +1,6 @@
 package com.freddominant.eurozahl.data.mapper
 
+import androidx.annotation.VisibleForTesting
 import com.freddominant.eurozahl.domain.model.DrawResult
 import com.freddominant.eurozahl.domain.model.LastDraw
 import com.freddominant.eurozahl.domain.model.Lottery
@@ -30,13 +31,21 @@ class MapperImpl @Inject constructor() : Mapper<lottoResult, lottoUIResult> {
         }
     }
 
+    @VisibleForTesting
+    fun parseDate(date: String): String {
+        val inputFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
+        val outputFormat = SimpleDateFormat(SIMPLIFIED_FORMAT, Locale.getDefault())
+        val formattedDate = inputFormat.parse(date) ?: return ""
+        return outputFormat.format(formattedDate)
+    }
+
     private fun LottoResult.isMainLottery(): Boolean {
         val lottery = Lottery.getLotteryFromName(lottery)
         return Lottery.LOTTO == lottery || Lottery.EURO_JACKPOT == lottery
     }
 
-    private fun extractSideLotteryDetail(lotteryType: Lottery, sideLotteries: List<LottoResult>): Pair<String, String> {
-        val lottery = sideLotteries.first { lotteryType.lotteryName == it.lottery }
+    private fun extractSideLotteryDetail(lotteryType: Lottery, sideLotteries: List<LottoResult>): Pair<String, String>? {
+        val lottery = sideLotteries.firstOrNull{ lotteryType.lotteryName == it.lottery } ?: return null
         return Pair(lotteryType.lotteryName, lottery.lastDraw.drawResult.number.orEmpty())
     }
 
@@ -50,14 +59,6 @@ class MapperImpl @Inject constructor() : Mapper<lottoResult, lottoUIResult> {
             Lottery.EURO_JACKPOT -> Pair(numbers, requireNotNull(euroNumbers))
             Lottery.SUPER_6, Lottery.SPIEL_77 -> Pair(numbers, emptyList())
         }
-    }
-
-
-    private fun parseDate(date: String): String {
-        val inputFormat = SimpleDateFormat(DATE_FORMAT, Locale.getDefault())
-        val outputFormat = SimpleDateFormat(SIMPLIFIED_FORMAT, Locale.getDefault())
-        val formattedDate = inputFormat.parse(date) ?: return ""
-        return outputFormat.format(formattedDate)
     }
 
     private companion object {
