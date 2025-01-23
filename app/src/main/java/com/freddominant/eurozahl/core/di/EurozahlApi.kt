@@ -1,9 +1,10 @@
-package com.freddominant.eurozahl.di
+package com.freddominant.eurozahl.core.di
 
-import com.freddominant.eurozahl.model.LottoResult
+import com.freddominant.eurozahl.domain.model.LottoResult
 import retrofit2.http.GET
 
-internal interface EurozahlApi {
+interface EurozahlApi {
+
     @GET(GET_RESULTS_URL)
     suspend fun getResults(): List<LottoResult>
 

@@ -1,6 +1,6 @@
-package com.freddominant.eurozahl.util
+package com.freddominant.eurozahl.core.utils
 
-import com.freddominant.eurozahl.model.Result
+import com.freddominant.eurozahl.domain.model.Result
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext

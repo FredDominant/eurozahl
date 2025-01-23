@@ -1,4 +1,4 @@
-package com.freddominant.eurozahl.model
+package com.freddominant.eurozahl.domain.model
 
 enum class Lottery(val lotteryName: String, val displayName: String) {
     LOTTO("6aus49", "LOTTO 6aus49"),
