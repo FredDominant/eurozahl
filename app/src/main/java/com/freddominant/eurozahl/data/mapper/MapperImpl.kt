@@ -46,11 +46,11 @@ class MapperImpl @Inject constructor() : Mapper<lottoResult, lottoUIResult> {
 
     private fun extractSideLotteryDetail(lotteryType: Lottery, sideLotteries: List<LottoResult>): Pair<String, String>? {
         val lottery = sideLotteries.firstOrNull{ lotteryType.lotteryName == it.lottery } ?: return null
-        return Pair(lotteryType.lotteryName, lottery.lastDraw.drawResult.number.orEmpty())
+        return Pair(lotteryType.displayName, lottery.lastDraw.drawResult.number.orEmpty())
     }
 
-    private fun LastDraw.getJackpotHeight(): BigDecimal {
-        return quotas.values.map { BigDecimal(it) }.first()
+    private fun LastDraw.getJackpotHeight(): BigDecimal? {
+        return quotas.values.map { BigDecimal(it) }.maxOrNull()
     }
 
     private fun DrawResult.mapWinningNumbers(lotteryType: Lottery): Pair<List<Int>, List<Int>> {

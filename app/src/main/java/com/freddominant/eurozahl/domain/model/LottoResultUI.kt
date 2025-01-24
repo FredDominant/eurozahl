@@ -7,7 +7,7 @@ data class LottoResultUI (
     val date: String,
     val nextDrawDate: String,
     val winningNumbers: Pair<List<Int>, List<Int>>,
-    val jackpotHeight: BigDecimal,
+    val jackpotHeight: BigDecimal?,
     val spiel77: Pair<String, String>?,
     val super6: Pair<String, String>?
 )
