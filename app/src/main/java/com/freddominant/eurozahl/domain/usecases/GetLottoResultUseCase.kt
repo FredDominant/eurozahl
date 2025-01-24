@@ -3,6 +3,7 @@ package com.freddominant.eurozahl.domain.usecases
 import com.freddominant.eurozahl.core.utils.CoroutineDispatcherProvider
 import com.freddominant.eurozahl.core.utils.executeTask
 import com.freddominant.eurozahl.data.mapper.MapperImpl
+import com.freddominant.eurozahl.domain.LottoAccessor
 import com.freddominant.eurozahl.domain.model.LottoResultUI
 import com.freddominant.eurozahl.domain.model.Result
 import com.freddominant.eurozahl.domain.repository.Repository
@@ -16,7 +17,9 @@ class GetLottoResultUseCase @Inject constructor (
     override suspend operator fun invoke(arg: Unit): Result<List<LottoResultUI>> {
         return dispatcherProvider.io.executeTask {
             val lottoUIResult = repository.getLotteries()
-            mapper.map(lottoUIResult)
+            val results = mapper.map(lottoUIResult)
+            LottoAccessor.lottoResult = results
+            results
         }
     }
 }
