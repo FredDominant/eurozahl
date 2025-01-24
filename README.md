@@ -17,6 +17,7 @@
 
 - 🎯 **Widget**: Doesn't automatically get updated
 - 🖌️ **Offline support**: Has no offline functionality
+- 📱 **SDK Level**: Requires minimum Android SDK level 24 to run.
 
 ---
 
