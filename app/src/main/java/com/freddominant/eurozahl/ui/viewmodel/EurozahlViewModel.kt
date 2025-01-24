@@ -26,7 +26,7 @@ class EurozahlViewModel @Inject constructor (
             updateState(LotteryUiEvents.ShowProgress)
             when(val result = useCase.invoke(Unit)) {
                 is Result.Success -> handleSuccess(result.data)
-                is Result.Error -> handleError(result.error)
+                is Result.Error -> handleError()
             }
         }
     }
@@ -36,9 +36,8 @@ class EurozahlViewModel @Inject constructor (
         updateState(newState)
     }
 
-    private suspend fun handleError(error: Exception) {
-        val errorMessage = error.message ?: "It's not you, it's us :)"
-        val newState = LotteryUiEvents.Error(errorMessage)
+    private suspend fun handleError() {
+        val newState = LotteryUiEvents.Error
         updateState(newState)
     }
 
