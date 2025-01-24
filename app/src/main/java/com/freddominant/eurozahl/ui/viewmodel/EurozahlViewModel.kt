@@ -21,7 +21,7 @@ class EurozahlViewModel @Inject constructor (
     private val _lotteryEvents = MutableSharedFlow<LotteryUiEvents>()
     val lotteryEvents = _lotteryEvents.asSharedFlow()
 
-    fun getLotteryResult() {
+    internal fun getLotteryResult() {
         viewModelScope.launch {
             updateState(LotteryUiEvents.ShowProgress)
             when(val result = useCase.invoke(Unit)) {

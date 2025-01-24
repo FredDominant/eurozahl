@@ -56,7 +56,9 @@ internal class EurozahlWidget : GlanceAppWidget() {
                 .padding(16.dp)
                 .clickable(
                     actionRunCallback<OpenLotto24Action>(
-                        parameters = actionParametersOf(OpenLotto24Action.OpenUrlKey to OpenLotto24Action.URL)
+                        parameters = actionParametersOf(
+                            OpenLotto24Action.urlKey to OpenLotto24Action.URL
+                        )
                     )
                 )
         ) {

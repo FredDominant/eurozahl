@@ -50,7 +50,7 @@ class MapperImpl @Inject constructor() : Mapper<lottoResult, lottoUIResult> {
     }
 
     private fun LastDraw.getJackpotHeight(): BigDecimal? {
-        return quotas.values.map { BigDecimal(it) }.maxOrNull()
+        return quotas.values.maxOfOrNull { BigDecimal(it) }
     }
 
     private fun DrawResult.mapWinningNumbers(lotteryType: Lottery): Pair<List<Int>, List<Int>> {

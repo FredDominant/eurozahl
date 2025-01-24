@@ -13,7 +13,7 @@ internal class OpenLotto24Action : ActionCallback {
         glanceId: GlanceId,
         parameters: ActionParameters
     ) {
-        val url = parameters[OpenUrlKey] ?: return
+        val url = parameters[urlKey] ?: return
         val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url)).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK
         }
@@ -24,7 +24,7 @@ internal class OpenLotto24Action : ActionCallback {
     }
 
     companion object {
-        val OpenUrlKey = ActionParameters.Key<String>("openUrlKey")
-        val URL = "https://www.lotto24.de/"
+        val urlKey = ActionParameters.Key<String>("openUrlKey")
+        const val URL = "https://www.lotto24.de/"
     }
 }

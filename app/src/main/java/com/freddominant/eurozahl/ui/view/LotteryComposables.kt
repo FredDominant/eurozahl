@@ -36,7 +36,7 @@ import com.freddominant.eurozahl.ui.state.LotteryUiEvents
 import java.math.BigDecimal
 
 @Composable
-fun LotteryResult(modifier: Modifier = Modifier, state: State<LotteryUiEvents>) {
+internal fun LotteryResult(modifier: Modifier = Modifier, state: State<LotteryUiEvents>) {
     when (state.value) {
         is LotteryUiEvents.ShowProgress -> Loading(modifier = modifier)
         is LotteryUiEvents.Error -> Error(modifier = modifier)
@@ -47,7 +47,7 @@ fun LotteryResult(modifier: Modifier = Modifier, state: State<LotteryUiEvents>) 
 }
 
 @Composable
-fun LotteryView(lotteries: List<LottoResultUI>) {
+internal fun LotteryView(lotteries: List<LottoResultUI>) {
     LazyColumn {
         items(lotteries) { lottoResult ->
             println("lottoResult >> $lottoResult")
@@ -57,7 +57,7 @@ fun LotteryView(lotteries: List<LottoResultUI>) {
 }
 
 @Composable
-fun LotteryCard(lottery: LottoResultUI) {
+internal fun LotteryCard(lottery: LottoResultUI) {
     Card(
         modifier = Modifier
             .padding(16.dp)
@@ -88,7 +88,7 @@ fun LotteryCard(lottery: LottoResultUI) {
 }
 
 @Composable
-fun NextDrawSection(nextDrawDate: String) {
+internal fun NextDrawSection(nextDrawDate: String) {
     Row {
         Text(
             text = "Next Draw on: ",
@@ -100,7 +100,7 @@ fun NextDrawSection(nextDrawDate: String) {
 }
 
 @Composable
-fun LotteryBalls(
+internal fun LotteryBalls(
     modifier: Modifier = Modifier,
     numbers: Pair<List<Int>, List<Int>>
 ) {
@@ -119,7 +119,7 @@ fun LotteryBalls(
 }
 
 @Composable
-fun LottoHeader(lottery: LottoResultUI) {
+internal fun LottoHeader(lottery: LottoResultUI) {
     Row(
         modifier = Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -134,7 +134,7 @@ fun LottoHeader(lottery: LottoResultUI) {
     }
 }
 @Composable
-fun LottoDrawDate(drawDate: String) {
+internal fun LottoDrawDate(drawDate: String) {
     Text(
         text = drawDate,
         color = Color.Black,
@@ -143,7 +143,7 @@ fun LottoDrawDate(drawDate: String) {
 }
 
 @Composable
-fun SideLotteryResult(lottery: LottoResultUI) {
+internal fun SideLotteryResult(lottery: LottoResultUI) {
     Column {
         if (lottery.spiel77 != null) {
             val (spiel77Text, number) = lottery.spiel77
@@ -166,7 +166,7 @@ fun SideLotteryResult(lottery: LottoResultUI) {
 }
 
 @Composable
-fun Ball(isSpecial: Boolean, winningNumber: Int) {
+internal fun Ball(isSpecial: Boolean, winningNumber: Int) {
     val cardColor = if (isSpecial) Color(0xFFFFC107) else Color(0xFF275881)
     Box(
         modifier = Modifier
@@ -185,7 +185,7 @@ fun Ball(isSpecial: Boolean, winningNumber: Int) {
 
 
 @Composable
-fun Loading(modifier: Modifier = Modifier) {
+internal fun Loading(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -196,7 +196,7 @@ fun Loading(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun Error(modifier: Modifier = Modifier) {
+internal fun Error(modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -217,7 +217,7 @@ fun Error(modifier: Modifier = Modifier) {
 }
 
 @Composable
-fun JackpotHeight(jackpotHeight: BigDecimal) {
+internal fun JackpotHeight(jackpotHeight: BigDecimal) {
     Text(
         text = formatBigDecimalToText(jackpotHeight),
         color = Color.Black,
