@@ -30,7 +30,7 @@ import com.freddominant.eurozahl.domain.model.Lottery
 import com.freddominant.eurozahl.domain.model.LottoResultUI
 import java.math.BigDecimal
 
-class EurozahlWidget : GlanceAppWidget() {
+internal class EurozahlWidget : GlanceAppWidget() {
 
     override suspend fun provideGlance(context: Context, id: GlanceId) {
         provideContent {
@@ -39,7 +39,7 @@ class EurozahlWidget : GlanceAppWidget() {
     }
 
     @Composable
-    fun LotteryView(lotteries: List<LottoResultUI>) {
+    private fun LotteryView(lotteries: List<LottoResultUI>) {
         Column(
             modifier = GlanceModifier.background(Color.White)
         ) {
@@ -50,7 +50,7 @@ class EurozahlWidget : GlanceAppWidget() {
     }
 
     @Composable
-    fun LotteryCard(lottery: LottoResultUI) {
+    private fun LotteryCard(lottery: LottoResultUI) {
         Column(
             modifier = GlanceModifier
                 .padding(16.dp)
@@ -73,7 +73,7 @@ class EurozahlWidget : GlanceAppWidget() {
     }
 
     @Composable
-    fun NextDrawSection(nextDrawDate: String) {
+    private fun NextDrawSection(nextDrawDate: String) {
         Row {
             Text(text = "Next Draw on: ")
             LottoDrawDate(nextDrawDate)
@@ -81,7 +81,7 @@ class EurozahlWidget : GlanceAppWidget() {
     }
 
     @Composable
-    fun LotteryBalls(
+    private fun LotteryBalls(
         modifier: GlanceModifier = GlanceModifier,
         numbers: Pair<List<Int>, List<Int>>
     ) {
@@ -100,7 +100,7 @@ class EurozahlWidget : GlanceAppWidget() {
     }
 
     @Composable
-    fun LottoHeader(lottery: LottoResultUI) {
+    private fun LottoHeader(lottery: LottoResultUI) {
         Row(
             modifier = GlanceModifier.fillMaxWidth(),
         ) {
@@ -114,12 +114,12 @@ class EurozahlWidget : GlanceAppWidget() {
     }
 
     @Composable
-    fun LottoDrawDate(drawDate: String) {
+    private fun LottoDrawDate(drawDate: String) {
         Text(text = drawDate)
     }
 
     @Composable
-    fun SideLotteryResult(lottery: LottoResultUI) {
+    private fun SideLotteryResult(lottery: LottoResultUI) {
         Column {
             if (lottery.spiel77 != null) {
                 val (spiel77Text, number) = lottery.spiel77
@@ -134,7 +134,7 @@ class EurozahlWidget : GlanceAppWidget() {
     }
 
     @Composable
-    fun Ball(isSpecial: Boolean, winningNumber: Int) {
+    private fun Ball(isSpecial: Boolean, winningNumber: Int) {
         val cardColor = if (isSpecial) Color(0xFFFFC107) else Color(0xFF275881)
         Box(
             modifier = GlanceModifier
@@ -152,11 +152,7 @@ class EurozahlWidget : GlanceAppWidget() {
     }
 
     @Composable
-    fun JackpotHeight(jackpotHeight: BigDecimal) {
+    private fun JackpotHeight(jackpotHeight: BigDecimal) {
         Text(text = formatBigDecimalToText(jackpotHeight))
-    }
-
-    private fun handleClick() {
-
     }
 }
