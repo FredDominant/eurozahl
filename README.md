@@ -9,10 +9,9 @@
 - 🎯 **Fetch Lotto Results**: Retrieves the latest lotto results using the Lotto24.de API.
 - 🖌️ **Modern UI**: Developed with Jetpack Compose.
 - 📱 **Home Screen Widget**: Displays lotto results directly on the home screen.
-- 🏗️ **Dependency Injection**: Powered by Hilt for seamless DI management.
-- 🌐 **Network Requests**: Built with Retrofit and Gson for efficient API interaction.
-- 🧪 **Unit Testing**: Includes tests with JUnit and MockK to ensure reliability.
-- 🔥 **Material You Design**: Leverages Material 3 for an enhanced user experience.
+- 🏗️ **Dependency Injection**: Uses Hilt for DI management.
+- 🌐 **Network Requests**: Built with Retrofit and Gson for network interaction.
+- 🧪 **Unit Testing**: Includes tests with JUnit and MockK.
 
 ## Limitations
 
@@ -23,13 +22,14 @@
 
 ## Project Structure
 
-This project adheres to modern Android architectural principles like **MVVM**. Here's a high-level overview of the structure:
+``` This project adheres to **MVVM** Architecture. Here's a high-level overview of the structure:
 com.freddominant.eurozahl
 ├── data          // API services, data models, and repositories
 ├── ui            // Jetpack Compose UI components
 ├── viewmodel     // ViewModels for state management
 ├── widget        // Glance-based home screen widget
 └── di            // Hilt dependency injection modules
+```
 
 ---
 
@@ -61,8 +61,8 @@ com.freddominant.eurozahl
 •	Update dependencies as needed.
 4.	Build and run the app on an emulator or a physical device.
 
-### Contribution
-# Contributions are welcome! Feel free to fork the repository and submit pull requests.
+## Contribution
+#### Contributions are welcome! Feel free to fork the repository and submit pull requests.
 1.	Fork the repository.
 2.	Create a feature branch: git checkout -b feature/new-feature.
 3.	Commit your changes: git commit -m "Add new feature".
